@@ -3,3 +3,6 @@
 .env.*
 *.key
 *.pem
+
+# Arbeitsordner, nicht veroeffentlichen
+fotos/_neu/

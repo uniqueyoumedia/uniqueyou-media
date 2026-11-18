@@ -4,7 +4,7 @@
 @font-face{font-family:"Marina";src:url(../fonts/marina.woff2) format("woff2"),url(../fonts/marina.ttf) format("truetype");font-weight:400;font-style:normal;font-display:block}
 :root{
   --paper:#F4F0E8; --petrol:#17547D; --petrol-d:#0F3A57; --sand:#E8E2D4;
-  --line:#D8D0BE; --muted:#5E7083; --neon:#CBFF00; --brand-blue:#1268A8;
+  --line:#D8D0BE; --muted:#5E7083; --neon:#CBFF00;
   --mx:clamp(20px,5vw,72px);
 }
 *{box-sizing:border-box}
@@ -59,7 +59,7 @@ h1 .src,h2 .src{font-size:.38em;vertical-align:.95em}
 /* Stern als Fussnotenzeichen, direkt am Wort */
 .src-star{display:inline-block;margin-left:.02em;vertical-align:.62em;text-decoration:none;line-height:0}
 .src-star svg{width:.28em;height:.28em;display:block;color:var(--petrol-d)}
-.src-star:hover svg{color:var(--brand-blue)}
+.src-star:hover svg{color:var(--petrol)}
 h1 .src-star,h2 .src-star{vertical-align:.58em;margin-left:-.07em}
 h1 .src-star svg,h2 .src-star svg{width:.3em;height:.3em}
 h1 .hand+.src-star,h2 .hand+.src-star{margin-left:-.13em}
@@ -115,8 +115,8 @@ h2 .hand,h1 .hand{font-size:1.28em;margin-right:.1em}
 .site-head.stuck{border-bottom-color:var(--line);box-shadow:0 2px 18px rgba(15,58,87,.05)}
 .head-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 0}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
-.brand svg{width:clamp(40px,4.2vw,50px);height:clamp(40px,4.2vw,50px);color:var(--brand-blue);flex:none}
-.brand b{font-weight:600;letter-spacing:-.01em;font-size:clamp(15px,1.3vw,17.5px)}
+.brand svg{width:clamp(40px,4.2vw,50px);height:clamp(40px,4.2vw,50px);color:var(--petrol);flex:none}
+.brand b{font-weight:600;letter-spacing:-.01em;font-size:clamp(15px,1.3vw,17.5px);color:var(--petrol)}
 .brand span{font-weight:400;color:var(--muted)}
 .brand>span{line-height:1.25}
 

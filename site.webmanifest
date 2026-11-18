@@ -1,0 +1,12 @@
+{
+  "name": "Unique You Media",
+  "short_name": "Unique You",
+  "icons": [
+    { "src": "/favicon-96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#0F3A57",
+  "background_color": "#F4F0E8",
+  "display": "browser",
+  "start_url": "/"
+}

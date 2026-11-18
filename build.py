@@ -125,6 +125,11 @@ def build_head(lang, slug, title, desc, base):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4F0E8">
+<link rel="icon" href="{base}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{base}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="{base}favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="{base}apple-touch-icon.png">
+<link rel="manifest" href="{base}site.webmanifest">
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{self_url}">

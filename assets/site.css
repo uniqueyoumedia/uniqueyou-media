@@ -35,6 +35,13 @@ mark{
   -webkit-box-decoration-break:clone;box-decoration-break:clone
 }
 h1 mark,h2 mark,.pull mark{background-image:linear-gradient(transparent 27%,var(--neon) 27%,var(--neon) 87%,transparent 87%)}
+/* Handschrift im Textmarker: eigene Metrik, deshalb eigener Verlauf */
+h1 mark.mark-hand,h2 mark.mark-hand{
+  background-image:linear-gradient(transparent 18%,var(--neon) 18%,var(--neon) 90%,transparent 90%);
+  padding:0 .1em
+}
+mark.mark-hand .hand{font-size:1em}
+h1 mark.mark-hand .hand,h2 mark.mark-hand .hand{font-size:1.2em;margin-right:0}
 .hand{font-family:"Marina","Instrument Sans",cursive;font-weight:400;letter-spacing:0;font-size:1.18em;line-height:.9}
 strong{font-weight:700;color:var(--petrol-d)}
 em{
@@ -48,6 +55,20 @@ em{
 }
 .src:hover{color:var(--petrol-d)}
 h1 .src,h2 .src{font-size:.38em;vertical-align:.95em}
+
+/* Stern als Fussnotenzeichen, direkt am Wort */
+.src-star{display:inline-block;margin-left:.02em;vertical-align:.62em;text-decoration:none;line-height:0}
+.src-star svg{width:.28em;height:.28em;display:block;color:var(--petrol-d)}
+.src-star:hover svg{color:var(--brand-blue)}
+h1 .src-star,h2 .src-star{vertical-align:.58em;margin-left:-.07em}
+h1 .src-star svg,h2 .src-star svg{width:.3em;height:.3em}
+h1 .hand+.src-star,h2 .hand+.src-star{margin-left:-.13em}
+.star-note{display:inline-block;width:9px;height:9px;margin-right:7px;color:var(--petrol-d);line-height:0}
+.star-note svg{width:9px;height:9px;display:block}
+
+/* Handschrift in Ueberschriften optisch auf die Grundlinie setzen */
+h1 .hand,h2 .hand{vertical-align:-.05em}
+h1 mark .hand,h2 mark .hand{vertical-align:baseline}
 
 /* Einblenden beim Scrollen */
 @media (prefers-reduced-motion:no-preference){
@@ -158,12 +179,12 @@ section{padding:clamp(56px,8vw,112px) 0 0}
 /* Button */
 .btn{
   display:inline-flex;align-items:center;gap:11px;
-  background:var(--petrol);color:var(--paper);text-decoration:none;
-  font-weight:600;font-size:16.5px;line-height:1;letter-spacing:-.005em;
-  padding:16px 28px;border-radius:999px;border:0;
+  background:var(--neon);color:var(--petrol-d);text-decoration:none;
+  font-weight:700;font-size:16.5px;line-height:1;letter-spacing:-.005em;
+  padding:16px 28px;border-radius:999px;border:0;cursor:pointer;
   transition:background .22s ease,transform .22s ease,box-shadow .22s ease
 }
-.btn:hover,.btn:focus-visible{background:var(--petrol-d);transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,58,87,.18)}
+.btn:hover,.btn:focus-visible{background:#bcee00;transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,58,87,.2)}
 .btn svg{width:17px;height:17px;flex:none;transition:transform .22s ease}
 .btn:hover svg{transform:translateX(3px)}
 .btn-neon{background:var(--neon);color:var(--petrol-d)}
@@ -407,6 +428,9 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
 
 /* ---------- WhatsApp ---------- */
 .chat{display:grid;gap:clamp(16px,2vw,24px);grid-template-columns:repeat(3,1fr);margin-top:clamp(26px,3.4vw,42px)}
+.chat.chat-4{grid-template-columns:repeat(4,1fr);gap:clamp(13px,1.6vw,20px)}
+.chat.chat-4 .bubble{font-size:14.5px;line-height:1.45;padding:12px 14px}
+.chat.chat-4 .chat-card{padding:16px}
 .chat-card{background:var(--sand);padding:clamp(18px,2vw,24px);display:flex;flex-direction:column;gap:12px}
 .bubble{
   background:var(--paper);border-radius:14px 14px 14px 3px;padding:14px 16px;
@@ -420,6 +444,47 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
 .chat-who{font-size:13px;color:var(--muted);margin-top:auto;padding-top:4px;line-height:1.4}
 .chat-who b{display:block;color:var(--petrol-d);font-size:14px;font-weight:600}
 
+/* ---------- Wachstum in Stufen ---------- */
+.grow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.2vw,46px);margin-top:clamp(28px,3.6vw,46px)}
+.grow-step{min-width:0}
+.grow-bar{display:flex;gap:4px;margin-bottom:16px}
+.grow-bar i{display:block;height:5px;flex:1;background:var(--line);border-radius:99px}
+.grow-bar i.on{background:var(--neon)}
+.grow-step .n{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
+.grow-step h3{font-size:clamp(18px,1.9vw,23px);margin-bottom:8px;line-height:1.2}
+.grow-step p{font-size:16px;line-height:1.5;margin:0}
+
+.stance{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,60px);
+  align-items:start;margin-top:clamp(34px,4.4vw,58px);
+  border-top:1px solid var(--line);padding-top:clamp(26px,3.4vw,42px)
+}
+
+/* ---------- ProvenExpert-Leiste ---------- */
+.pe{
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px clamp(20px,3vw,40px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(16px,2vw,22px) 0;margin-top:clamp(26px,3.4vw,42px)
+}
+.pe-score{display:flex;align-items:baseline;gap:9px;flex:none}
+.pe-score b{font-size:clamp(28px,3.2vw,40px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--petrol-d)}
+.pe-score span{font-size:14px;color:var(--muted)}
+.pe-stars{display:flex;gap:3px;flex:none}
+.pe-stars svg{width:19px;height:19px;color:var(--neon)}
+.pe-text{font-size:15.5px;color:var(--muted);line-height:1.45;max-width:46ch}
+.pe-text b{color:var(--petrol-d);font-weight:600}
+.pe-text a{color:var(--petrol);text-decoration:none;border-bottom:1px solid var(--line)}
+.pe-text a:hover{border-bottom-color:var(--petrol)}
+
+/* ---------- Vorher und nachher ---------- */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px);margin-top:clamp(22px,2.8vw,34px)}
+.ba figure{margin:0}
+.ba .shot{aspect-ratio:9/16}
+.ba figcaption{
+  font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-top:9px
+}
+
 /* ---------- Fußbereich ---------- */
 .site-foot{border-top:1px solid var(--line);margin-top:clamp(48px,6vw,88px);padding:clamp(32px,4vw,54px) 0 36px}
 .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(22px,3vw,44px)}
@@ -429,6 +494,21 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
 .foot-grid a:hover{border-bottom:1px solid var(--line)}
 .foot-grid p{font-size:14.5px;color:var(--muted);margin:0 0 .6em;max-width:34ch}
 .foot-bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:clamp(28px,3.4vw,44px);padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+
+/* ---------- Social-Icons ---------- */
+.social{display:flex;gap:10px;margin-top:16px}
+.social a{
+  display:flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border:1px solid var(--line);border-radius:50%;
+  color:var(--petrol-d);text-decoration:none;flex:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease
+}
+.social a:hover,.social a:focus-visible{
+  background:var(--petrol-d);border-color:var(--petrol-d);color:var(--paper);transform:translateY(-2px)
+}
+.social svg{width:19px;height:19px;display:block}
+.contact .social a{border-color:rgba(244,240,232,.38);color:var(--paper)}
+.contact .social a:hover,.contact .social a:focus-visible{background:var(--neon);border-color:var(--neon);color:var(--petrol-d)}
 
 /* ---------- Seitenkopf der Unterseiten ---------- */
 .page-head{padding:clamp(34px,5vw,72px) 0 0}
@@ -477,10 +557,14 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
   .band{padding:34px 0;margin-top:44px}
   .check{gap:16px;padding:18px 0}
   .chat{grid-template-columns:1fr;gap:16px}
+  .chat.chat-4{grid-template-columns:repeat(2,1fr);gap:16px}
+  .pe-text{max-width:none}
   .optin-grid{grid-template-columns:1fr;gap:26px}
   .foot-grid{grid-template-columns:1fr 1fr;row-gap:28px}
   .reasons{grid-template-columns:1fr;gap:26px}
   .quotes-lead{grid-template-columns:1fr}
+  .grow{grid-template-columns:1fr;gap:24px}
+  .stance{grid-template-columns:1fr;gap:22px}
   .case{grid-template-columns:1fr;gap:30px}
   .case-shots{max-width:420px}
   .case-shots.three{max-width:none}
@@ -530,12 +614,16 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
   .optin{padding:28px 0}
   .form{max-width:none}
   .foot-grid{grid-template-columns:1fr;row-gap:24px}
+  .social a{width:44px;height:44px}
   .foot-bar{flex-direction:column;gap:8px}
   .case{grid-template-columns:1fr;gap:26px}
   .refs{grid-template-columns:1fr;gap:26px}
   .ref-img{aspect-ratio:4/3}
   .play{width:46px;height:46px}
   .case-shots{max-width:none;gap:12px}
+  .chat.chat-4{grid-template-columns:1fr}
+  .ba{gap:12px}
+  .pe{gap:12px 20px}
   .case-shots.three{grid-template-columns:1fr 1fr;gap:10px}
   .case-shots.three .shot:last-child{grid-column:span 2;aspect-ratio:4/3}
   .step{grid-template-columns:1fr;gap:6px;padding:22px 0}
@@ -592,7 +680,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
   html,body{background:#fff}
   body{font-size:9.4pt;line-height:1.42;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet{max-width:none;padding:0}
-  .print-hint,.burger,.mobile-nav,.nav,.lang,.optin,.form,.todo{display:none !important}
+  .print-hint,.burger,.mobile-nav,.nav,.lang,.optin,.form,.todo,.social{display:none !important}
   .site-head{position:static;background:none;backdrop-filter:none;border:0;box-shadow:none}
   .head-in{padding:0 0 4mm;border-bottom:1px solid var(--line)}
   .site-foot{margin-top:6mm;padding:4mm 0 0}
@@ -611,6 +699,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
   .plan{padding:4mm}
   .plan .price{font-size:15pt}
   .chat{grid-template-columns:repeat(3,1fr);gap:4mm;break-inside:avoid}
+  .chat.chat-4{grid-template-columns:repeat(4,1fr);gap:3mm}
+  .pe{padding:3mm 0;margin-top:4mm;break-inside:avoid}
+  .pe-score b{font-size:17pt}
+  .pe-text{font-size:8.8pt}
+  .ba{grid-template-columns:1fr 1fr;gap:4mm;break-inside:avoid}
   .faq details{break-inside:avoid}
   .faq .a{display:block}
   .hero-grid{gap:2.5mm;margin-top:4mm}
@@ -669,11 +762,15 @@ footer{border-top:1px solid var(--line);padding:22px 0 46px;display:flex;justify
   .qr p{font-size:7.2pt;margin-top:1.6mm}
 
   .rv{opacity:1 !important;transform:none !important;transition:none !important}
-  .btn{background:none !important;color:var(--petrol) !important;padding:0;font-size:9.6pt;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+  .btn{background:none !important;color:var(--petrol-d) !important;font-weight:700;padding:0;font-size:9.6pt;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
   .btn svg{display:none}
   .btn-row{margin-top:3mm;gap:3mm}
   .btn-note{font-size:8.4pt}
   .reasons{grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm}
+  .grow{grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:4mm;break-inside:avoid}
+  .grow-step h3{font-size:10.4pt}
+  .grow-step p{font-size:8.8pt}
+  .stance{grid-template-columns:1fr 1fr;gap:6mm;margin-top:5mm;padding-top:4mm;break-inside:avoid}
   .reason{padding-top:2.5mm;break-inside:avoid}
   .reason h3{font-size:10.4pt;margin-bottom:1.5mm}
   .reason p{font-size:8.8pt;line-height:1.4}

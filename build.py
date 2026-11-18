@@ -60,13 +60,16 @@ QR_SVG = ('<svg viewBox="0 0 %s %s" role="img" aria-label="QR code linking to un
 
 # ---------------------------------------------------------------- Seitenregister
 # slug: (Dateiname EN, Dateiname DE, Menuetitel EN, Menuetitel DE)
+# Deutsch ist die Hauptsprache und liegt im Wurzelverzeichnis,
+# Englisch liegt unter en/.
+# slug: (Datei EN, Datei DE, Menuetitel EN, Menuetitel DE)
 PAGES = [
-    ("home",     "index.html",    "de/index.html",       "Home",     "Start"),
-    ("services", "services.html", "de/leistungen.html",  "Services", "Leistungen"),
-    ("work",     "work.html",     "de/referenzen.html",  "Work",     "Referenzen"),
-    ("about",    "about.html",    "de/ueber-uns.html",   "About",    "Über uns"),
-    ("process",  "process.html",  "de/ablauf.html",      "Process",  "Ablauf"),
-    ("legal",    "legal.html",    "de/rechtliches.html", "Imprint",  "Impressum"),
+    ("home",     "en/index.html",    "index.html",        "Home",     "Start"),
+    ("services", "en/services.html", "leistungen.html",   "Services", "Leistungen"),
+    ("work",     "en/work.html",     "referenzen.html",   "Work",     "Referenzen"),
+    ("about",    "en/about.html",    "ueber-uns.html",    "About",    "Über uns"),
+    ("process",  "en/process.html",  "ablauf.html",       "Process",  "Ablauf"),
+    ("legal",    "en/legal.html",    "rechtliches.html",  "Imprint",  "Impressum"),
 ]
 NAV_SLUGS = ["services", "work", "about", "process"]
 BY_SLUG = {p[0]: p for p in PAGES}
@@ -107,7 +110,7 @@ def href(slug, target_lang, base):
     Verzeichnis der aktuellen Seite ab und rechnen den relativen Pfad aus.
     """
     target = BY_SLUG[slug][1] if target_lang == "en" else BY_SLUG[slug][2]
-    here = "." if base == "" else "de"
+    here = "en" if base else "."
     return os.path.relpath(target, here)
 
 
@@ -127,7 +130,7 @@ def build_head(lang, slug, title, desc, base):
 <link rel="canonical" href="{self_url}">
 <link rel="alternate" hreflang="en" href="{en_url}">
 <link rel="alternate" hreflang="de" href="{de_url}">
-<link rel="alternate" hreflang="x-default" href="{en_url}">
+<link rel="alternate" hreflang="x-default" href="{de_url}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -162,9 +165,9 @@ def build_header(lang, slug, base):
     <nav class="nav" aria-label="{t['menu']}">{''.join(links)}</nav>
     <div class="head-side">
       <div class="lang">
-        <a href="{en_href}"{' aria-current="true"' if lang == 'en' else ''} hreflang="en">EN</a>
-        <span>/</span>
         <a href="{de_href}"{' aria-current="true"' if lang == 'de' else ''} hreflang="de">DE</a>
+        <span>/</span>
+        <a href="{en_href}"{' aria-current="true"' if lang == 'en' else ''} hreflang="en">EN</a>
       </div>
       <a class="btn" href="{CALENDLY}" target="_blank" rel="noopener">{t['talk']}{ARROW}</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="{t['menu']}"><i></i></button>
@@ -232,7 +235,7 @@ SCRIPT = """<script src="%sassets/site.js" defer></script>
 
 
 def build_page(lang, slug):
-    base = "" if lang == "en" else "../"
+    base = "../" if lang == "en" else ""
     frag = read(("en/" if lang == "en" else "de/") + slug + ".html")
 
     m = re.match(r"\s*<!--\s*title:\s*(.*?)\s*\|\s*desc:\s*(.*?)\s*-->\s*", frag, re.S)

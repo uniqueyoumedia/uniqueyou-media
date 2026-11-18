@@ -135,6 +135,8 @@ def build_head(lang, slug, title, desc, base):
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{self_url}">
+<link rel="preload" href="{base}fonts/marina.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{base}fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}assets/site.css">
 <script>if('IntersectionObserver' in window&&!matchMedia('print').matches)document.documentElement.className+=' js';</script>
 </head>
